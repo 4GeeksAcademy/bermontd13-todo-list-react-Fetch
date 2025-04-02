@@ -12,8 +12,11 @@ const Home = () => {
 			const response = await fetch("https://playground.4geeks.com/todo/users/bermont134geeks", {
 				method: "GET"
 			});
-	
+			
 			if (!response.ok) {
+				if (response.status == 404){
+					createUser()
+				}
 				throw new Error("Sucedió un error al consultar el endpoint.");
 			}
 	
@@ -25,7 +28,16 @@ const Home = () => {
 		}
 	};
 	
+	const createUser = async () => {
+		const response = await fetch(`https://playground.4geeks.com/todo/users/bermont134geeks`, {
+			method: "POST",
+			
+		});
 
+		if (!response.ok) {
+			throw new Error("Ocurrió un error al crear el usuario")
+		}
+	}
 
 	const createTodo = async () => {
 		if (inputValue.trim() === "") return; // Evita tareas vacías
